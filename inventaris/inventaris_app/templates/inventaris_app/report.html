@@ -1,0 +1,99 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Report</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var reportData = {{ report|safe }};
+            console.log(reportData);
+            // Further processing of the report data
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h1 {
+            color: #007bff;
+        }
+        h2 {
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            color: #343a40;
+        }
+        .list-group-item {
+            background-color: #f1f3f5;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .list-group-item:nth-child(even) {
+            background-color: #e9ecef;
+        }
+        .lead {
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Inventory Report</h1>
+        <p class="lead">Date: {{ report.date }}</p>
+        
+        <div class="report-section">
+            <h2 class="h4">Current Stock</h2>
+            <ul class="list-group">
+                {% for item, stock in report.current_stock.items %}
+                <li class="list-group-item">{{ item }}: {{ stock }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="report-section">
+            <h2 class="h4">Low Stock Items</h2>
+            <ul class="list-group">
+                {% for item, stock in report.low_stock_items.items %}
+                <li class="list-group-item">{{ item }}: {{ stock }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="report-section">
+            <h2 class="h4">Stock Trends</h2>
+            <ul class="list-group">
+                {% for trend in report.stock_trends %}
+                <li class="list-group-item">
+                    {{ trend.item }} - Added: {{ trend.total_added }},
+                    Removed: {{ trend.total_removed }},
+                    Net: {{ trend.net_stock }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="report-section">
+            <h2 class="h4">Predicted Future Stock Needs</h2>
+            <ul class="list-group">
+                {% for item, need in report.predicted_needs.items %}
+                <li class="list-group-item">{{ item }}: {{ need }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Item</title>
+</head>
+<body>
+    <h1>Update Item</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update Item</button>
+    </form>
+    <a href="{% url 'view_inventory' %}">Back to Inventory</a>
+</body>
+</html>

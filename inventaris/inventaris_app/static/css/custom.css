@@ -1,0 +1,41 @@
+body {
+    padding-top: 56px; /* Ensures content isn't hidden behind the navbar */
+}
+
+#navbar {
+    background-color: transparent; /* Navbar starts transparent */
+    transition: background-color 0.5s ease;
+}
+
+.custom-btn {
+    color: white; /* Initial button color */
+    border: none; /* Remove default button border */
+    background-color: transparent; /* Button background is also transparent */
+    transition: color 0.5s ease, text-shadow 0.5s ease;
+}
+
+.custom-btn:hover {
+    text-shadow: 0px 0px 8px lightblue; /* Glow effect on hover */
+}
+
+.custom-btn.active {
+    color: orange; /* Change button color when clicked */
+}
+
+.navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.8); /* Navbar becomes visible when scrolling down */
+    transition: background-color 0.5s ease;
+}
+
+.navbar.scrolled .custom-btn {
+    color: orange; /* Button color changes when navbar is visible */
+}
+
+.navbar-brand img {
+    height: 40px;
+    transition: transform 0.5s ease;
+}
+
+.navbar.scrolled img {
+    transform: rotate(360deg); /* Rotate image when navbar appears */
+}
