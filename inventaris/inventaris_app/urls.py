@@ -13,5 +13,7 @@ urlpatterns = [
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
     path('base/', views.base, name='base'),
-    path('dashboard/', views.dashboard, name='dashboard')
+    path('dashboard/', views.inventory_dashboard, name='dashboard'),
+    path('export/pdf/', views.export_report_pdf, name='export_report_pdf'),
+    path('export/excel/', views.export_report_excel, name='export_report_excel'),
 ]

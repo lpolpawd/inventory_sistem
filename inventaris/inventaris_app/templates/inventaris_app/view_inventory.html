@@ -19,6 +19,20 @@
         {% endif %}
     </div>
 
+    <form method="GET" action="{% url 'view_inventory' %}">
+        <input type="text" name="q" placeholder="Search inventory..." value="{{ request.GET.q }}">
+    
+        <select name="filter_by">
+            <option value="">All</option>
+            <option value="low_stock" {% if request.GET.filter_by == 'low_stock' %}selected{% endif %}>Low Stock</option>
+            <option value="high_stock" {% if request.GET.filter_by == 'high_stock' %}selected{% endif %}>High Stock</option>
+        </select>
+    
+        <button type="submit">Search & Filter</button>
+    </form>
+    
+    
+
     <div class="table-responsive">
         <table class="table table-bordered text-center">
             <thead class="table-dark">
